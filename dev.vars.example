@@ -1,0 +1,11 @@
+# Lokální vývojové secrets — ZKOPÍRUJ jako .dev.vars
+# .dev.vars je v .gitignore — nikdy se necommituje
+#
+# Pro produkci NEPOUŽÍVAT tento soubor — použij:
+#   wrangler secret put JWT_SECRET
+#   wrangler secret put QR_HMAC_SECRET
+#
+# Vygeneruj silné klíče přes: openssl rand -hex 32
+
+JWT_SECRET=zmen-tento-lokalni-vyvojovy-klic-na-nahodny-retezec
+QR_HMAC_SECRET=zmen-tento-lokalni-qr-klic-na-jiny-nahodny-retezec

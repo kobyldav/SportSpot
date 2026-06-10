@@ -1,0 +1,62 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "rezervace-api",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-01-15",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"observability": {
+		"enabled": true
+	},
+	// ─── D1 DATABÁZE ───────────────────────────────────
+	// database_id doplň po `wrangler d1 create rezervace-db`
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "rezervace-db",
+			"database_id": "5841f7bb-2b82-46a4-8eb2-0ded8460fd61",
+			"migrations_dir": "migrations"
+		},
+	],
+	// ─── KV STORE ──────────────────────────────────────
+	// id doplň po `wrangler kv namespace create ...`
+	"kv_namespaces": [
+		{
+			"binding": "SESSIONS",
+			"id": "635151c263884dc78a46fe931e45766e"
+		},
+		{
+			"binding": "CACHE",
+			"id": "1f2bad80a46b4b538d5eb43ab1322355"
+		}
+	],
+	// ─── R2 ÚLOŽIŠTĚ ───────────────────────────────────
+	"r2_buckets": [
+		{
+			"binding": "STORAGE",
+			"bucket_name": "rezervace-storage"
+		}
+	],
+	// ─── DURABLE OBJECTS (zamykání slotů) ──────────────
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "COURT_BOOKING",
+				"class_name": "CourtBooking"
+			}
+		]
+	},
+	// SQLite-backed Durable Objects — dostupné na free plánu
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": [
+				"CourtBooking"
+			]
+		}
+	]
+	// Secrets (NEDÁVAT SEM) — nastavit přes:
+	//   wrangler secret put JWT_SECRET
+	//   wrangler secret put QR_HMAC_SECRET
+}

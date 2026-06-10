@@ -1,0 +1,24 @@
+# Závislosti
+node_modules/
+
+# Cloudflare
+.wrangler/
+.dev.vars
+
+# Secrets — NIKDY necommitovat!
+.env
+*.local
+
+# Build
+dist/
+.output/
+
+# Editor
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+*.log
+npm-debug.log*
